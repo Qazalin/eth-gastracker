@@ -1,4 +1,5 @@
-import useSWR from "swr";
+import { generalFetcher } from "./generalFetcher";
+import useSWR, { SWRConfiguration } from "swr";
 
 /**
  * Re-usable SWR api implementation.
@@ -9,7 +10,8 @@ import useSWR from "swr";
  */
 function useApi<ParamsType extends Record<string, string>, ResponseType>(
   url: string,
-  params: ParamsType
+  params: ParamsType,
+  config?: SWRConfiguration
 ): { loading: boolean; error: unknown; data: ResponseType } {
   const usp = new URLSearchParams(params);
 
@@ -17,12 +19,17 @@ function useApi<ParamsType extends Record<string, string>, ResponseType>(
   usp.sort();
   const qs = usp.toString();
 
-  const { data, error } = useSWR<ResponseType, unknown>(`${url}?${qs}`);
+  const endpoint = `${url}?${qs}`;
+  const { data, error } = useSWR<ResponseType, unknown>(
+    endpoint,
+    generalFetcher,
+    config
+  );
 
   return {
     loading: !error && !data,
-    data,
     error,
+    data,
   };
 }
 

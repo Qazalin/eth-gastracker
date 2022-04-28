@@ -1,8 +1,23 @@
 import { Layout, GasPriceLayout } from "@etherTrack/components";
-import { EtherscanGasPriceRes } from "@etherTrack/types/ApiTypes";
+import useApi from "@etherTrack/lib/fetcher";
+import {
+  EtherscanGasParams,
+  EtherscanGasPriceRes,
+} from "@etherTrack/types/ApiTypes";
 import useSWR, { SWRConfig } from "swr";
 
-const Index = ({ data }) => {
+const Index = ({ ssr }) => {
+  const params: EtherscanGasParams = {
+    module: "gastracker",
+    action: "gasoracle",
+    apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
+  };
+  const { loading, error, data } = useApi<
+    EtherscanGasParams,
+    EtherscanGasPriceRes
+  >("https://api.etherscan.io/api", params);
+
+  if (loading) return <h1>loding..</h1>;
   console.log(data);
   return (
     <Layout>
@@ -30,7 +45,7 @@ export async function getServerSideProps() {
   const data: EtherscanGasPriceRes = await res.json();
   return {
     props: {
-      data,
+      ssr: data,
     },
   };
 }
