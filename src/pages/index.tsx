@@ -1,12 +1,14 @@
 import { Center, Text, Button } from "@chakra-ui/react";
 import { Layout, GasView, DarkModeSwitch } from "@etherTrack/components";
-import useSWR from "swr";
+import useSWR, { SWRConfig } from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const Index = () => {
+const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN}`;
+
+const Index = ({ fallback }) => {
   const { data, error } = useSWR(
-    `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN}`,
+    gasApiEndpoint,
     fetcher,
     { refreshInterval: 5000 } // data should update every 5 seconds
   );
@@ -16,13 +18,27 @@ const Index = () => {
   console.log(data);
 
   return (
-    <Layout>
-      <DarkModeSwitch />
-      <Center flexDir="column" mt="50%">
-        {data.result.LastBlock}
-      </Center>
-    </Layout>
+    <SWRConfig value={{ fallback }}>
+      <Layout>
+        <DarkModeSwitch />
+        <Center flexDir="column" mt="50%">
+          {data.result.LastBlock}
+        </Center>
+      </Layout>
+    </SWRConfig>
   );
 };
 
 export default Index;
+
+export async function getServerSideProps() {
+  const res = await fetch(gasApiEndpoint);
+  const data = await res.json();
+  return {
+    props: {
+      fallback: {
+        gasApiEndpoint: data,
+      },
+    },
+  };
+}
