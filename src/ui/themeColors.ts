@@ -73,7 +73,7 @@ export const ThemeColors = {
         _dark: "red.400",
       },
       green1: {
-        default: "green.500",
+        default: "green.600",
         _dark: "green.400",
       },
       blue1: {

@@ -1,27 +1,36 @@
-import { Flex, HStack, Center, Text, Button } from "@chakra-ui/react";
 import { Layout, GasPriceLayout } from "@etherTrack/components";
 import { EtherscanGasPriceRes } from "@etherTrack/types/ApiTypes";
+import useSWR, { SWRConfig } from "swr";
 
-const Index = () => {
-  const data: EtherscanGasPriceRes = {
-    status: "1",
-    message: "OK",
-    result: {
-      LastBlock: "14670971",
-      SafeGasPrice: "37",
-      ProposeGasPrice: "37",
-      FastGasPrice: "38",
-      suggestBaseFee: "36.240551136",
-      gasUsedRatio:
-        "0.9997641,0.659677333333333,0.1880484,0.195271366666667,0.448244766666667",
-    },
-  };
-
+const Index = ({ data }) => {
+  console.log(data);
   return (
     <Layout>
-      <GasPriceLayout data={data.result} />
+      <h1>hello world</h1>
     </Layout>
   );
 };
 
 export default Index;
+
+export async function getServerSideProps() {
+  const baseUrl = "https://api.etherscan.io/api";
+  const res = await fetch(
+    baseUrl +
+      "?" +
+      new URLSearchParams({
+        module: "gastracker",
+        action: "gasoracle",
+        apiKey: process.env.ETHERSCAN_API_KEY,
+      }),
+    {
+      method: "GET",
+    }
+  );
+  const data: EtherscanGasPriceRes = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+}

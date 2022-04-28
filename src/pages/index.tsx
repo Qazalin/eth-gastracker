@@ -1,5 +1,4 @@
-import { Center, Text, Button } from "@chakra-ui/react";
-import { Layout, GasView, DarkModeSwitch } from "@etherTrack/components";
+import { Layout, GasPriceLayout } from "@etherTrack/components";
 import { EtherscanGasPriceRes } from "@etherTrack/types/ApiTypes";
 import useSWR, { SWRConfig } from "swr";
 
@@ -21,10 +20,7 @@ const Index = ({ fallback }) => {
   return (
     <SWRConfig value={{ fallback }}>
       <Layout>
-        <DarkModeSwitch />
-        <Center flexDir="column" mt="50%">
-          {data.result.LastBlock}
-        </Center>
+        <GasPriceLayout data={data.result} />
       </Layout>
     </SWRConfig>
   );

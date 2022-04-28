@@ -7,15 +7,14 @@ export const GasView: React.FC<GasViewPropType> = ({
   gasPrice,
   estimatedTime,
 }) => {
-  let color: string;
-  switch (title) {
-    case "Low":
-      color = "green1";
-    case "Average":
-      color = "yellow1";
-    case "High":
-      color = "red1";
-  }
+  const colors: Record<"Low" | "Average" | "High", string> = {
+    Low: "green1",
+    Average: "yellow1",
+    High: "red1",
+  };
+
+  const color = colors[title];
+
   return (
     <Box
       w="100%"
@@ -34,11 +33,9 @@ export const GasView: React.FC<GasViewPropType> = ({
         <Text fontSize="2.4rem" color={color} mb="50px" variant="h1">
           {title}
         </Text>
-        <Text fontSize="1.7rem" variant="h2">
-          {gasPrice} gwei
-        </Text>
+        <Text fontSize="1.7rem">{gasPrice} gwei</Text>
         <Text variant="h3" color="text2">
-          ~ {estimatedTime}
+          ~{estimatedTime}
         </Text>
       </Center>
     </Box>

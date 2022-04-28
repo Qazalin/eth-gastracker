@@ -1,4 +1,4 @@
-import { Flex, HStack, Center, Text, Button } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { GasView } from "@etherTrack/components";
 import { EtherscanGasResultType } from "@etherTrack/types/ApiTypes";
 
@@ -13,7 +13,7 @@ export const GasPriceLayout: React.FC<{ data: EtherscanGasResultType }> = ({
         gasPrice={data.ProposeGasPrice}
         estimatedTime="2sec"
       />
-      <GasView title="Low" gasPrice={data.FastGasPrice} estimatedTime="2sec" />
+      <GasView title="High" gasPrice={data.FastGasPrice} estimatedTime="2sec" />
     </HStack>
   );
 };
