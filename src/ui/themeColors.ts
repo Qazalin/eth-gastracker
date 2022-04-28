@@ -24,17 +24,18 @@ export const COLORS = {
       "800": "#5C0A0A",
       "900": "#2E0505",
     },
-    orange: {
-      "50": "#EAFBEF",
-      "100": "#C4F2D1",
-      "200": "#9EEAB4",
-      "300": "#78E297",
-      "400": "#53DA7A",
-      "500": "#2DD25C",
-      "600": "#24A84A",
-      "700": "#1B7E37",
-      "800": "#125425",
-      "900": "#092A12",
+
+    yellow: {
+      50: "#fffadd",
+      100: "#fcf1b3",
+      200: "#f8e885",
+      300: "#f6de56",
+      400: "#f3d529",
+      500: "#d9bc11",
+      600: "#a99209",
+      700: "#796804",
+      800: "#483f00",
+      900: "#1a1500",
     },
     blue: {
       "50": "#E5F3FF",
@@ -67,6 +68,22 @@ export const ThemeColors = {
   semanticTokens: {
     colors: {
       error: "red.500",
+      red1: {
+        default: "red.500",
+        _dark: "red.400",
+      },
+      green1: {
+        default: "green.500",
+        _dark: "green.400",
+      },
+      blue1: {
+        default: "blue.500",
+        _dark: "blue.400",
+      },
+      yellow1: {
+        default: "yellow.500",
+        _dark: "yellow.400",
+      },
       bg0: {
         default: "gray.50",
         _dark: "gray.900",
@@ -89,11 +106,11 @@ export const ThemeColors = {
       },
       text2: {
         default: "gray.500",
-        _dark: "gray.200",
+        _dark: "gray.400",
       },
       text3: {
-        default: "gray.300",
-        _dark: "gray.400",
+        default: "gray.600",
+        _dark: "gray.500",
       },
       primary: {
         default: "blue.300",

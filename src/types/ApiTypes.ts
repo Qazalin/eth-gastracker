@@ -4,7 +4,7 @@ export interface EtherscanGasPriceRes {
   result: EtherscanGasResultType;
 }
 
-type EtherscanGasResultType = {
+export type EtherscanGasResultType = {
   LastBlock: string;
   SafeGasPrice: string;
   ProposeGasPrice: string;

@@ -20,7 +20,6 @@ export const theme = extendTheme({
     global: (props: any) => ({
       body: {
         fontFamily: "body",
-        mx: "20px",
         // animation for change color mode
         // transition: "background 2s",
         transition: "none",
