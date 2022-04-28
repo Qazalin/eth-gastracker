@@ -4,7 +4,7 @@ import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
 } from "@etherTrack/types/ApiTypes";
-import useSWR, { SWRConfig } from "swr";
+import { ethers } from "ethers";
 
 const Index = ({ ssr }) => {
   const params: EtherscanGasParams = {
@@ -18,7 +18,9 @@ const Index = ({ ssr }) => {
   >("https://api.etherscan.io/api", params);
 
   if (loading) return <h1>loding..</h1>;
-  console.log(data);
+  const bn = ethers.utils.parseUnits(data.result.FastGasPrice, "gwei");
+  const w = ethers.utils.formatUnits(bn, "wei");
+
   return (
     <Layout>
       <h1>hello world</h1>

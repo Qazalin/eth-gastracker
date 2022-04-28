@@ -13,6 +13,7 @@
     "@emotion/styled": "11.1.5",
     "@fontsource/lato": "^4.5.5",
     "@fontsource/raleway": "^4.5.5",
+    "ethers": "^5.6.4",
     "framer-motion": "^4.0.3",
     "next": "latest",
     "react": "^17.0.2",
