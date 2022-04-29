@@ -1,14 +1,14 @@
-import { generalFetcher } from "./generalFetcher";
+import { generalFetcher } from "../generalFetcher";
 import useSWR, { SWRConfiguration } from "swr";
 
-/**
+/*
  * Re-usable SWR api implementation.
  *
  * @param The URL of API endpoint
  * @param Query params
  * @returns ResponseType
  */
-function useApi<ParamsType extends Record<string, string>, ResponseType>(
+export function useApi<ParamsType extends Record<string, string>, ResponseType>(
   url: string,
   params: ParamsType,
   config?: SWRConfiguration
@@ -21,7 +21,7 @@ function useApi<ParamsType extends Record<string, string>, ResponseType>(
 
   const endpoint = `${url}?${qs}`;
   const { data, error } = useSWR<ResponseType, unknown>(
-    endpoint,
+    () => endpoint,
     generalFetcher,
     config
   );
@@ -32,5 +32,3 @@ function useApi<ParamsType extends Record<string, string>, ResponseType>(
     data,
   };
 }
-
-export default useApi;

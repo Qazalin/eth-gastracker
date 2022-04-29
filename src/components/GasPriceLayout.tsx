@@ -1,19 +1,32 @@
 import { HStack } from "@chakra-ui/react";
 import { GasView } from "@etherTrack/components";
-import { EtherscanGasResultType } from "@etherTrack/types/ApiTypes";
+import { GasInfoLayoutProps } from "@etherTrack/types";
 
-export const GasPriceLayout: React.FC<{ data: EtherscanGasResultType }> = ({
-  data,
+export const GasInfoLayout: React.FC<GasInfoLayoutProps> = ({
+  SafeGasPrice,
+  SafeGasEstimate,
+  ProposeGasPrice,
+  ProposeGasEstimate,
+  FastGasPrice,
+  FastGasEstimate,
 }) => {
   return (
     <HStack spacing="10px" w="100%" h="50%">
-      <GasView title="Low" gasPrice={data.SafeGasPrice} estimatedTime="2sec" />
+      <GasView
+        title="Low"
+        gasPrice={SafeGasPrice}
+        estimatedTime={SafeGasEstimate}
+      />
       <GasView
         title="Average"
-        gasPrice={data.ProposeGasPrice}
-        estimatedTime="2sec"
+        gasPrice={ProposeGasPrice}
+        estimatedTime={ProposeGasEstimate}
       />
-      <GasView title="High" gasPrice={data.FastGasPrice} estimatedTime="2sec" />
+      <GasView
+        title="High"
+        gasPrice={FastGasPrice}
+        estimatedTime={FastGasEstimate}
+      />
     </HStack>
   );
 };

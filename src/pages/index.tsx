@@ -1,16 +1,15 @@
-import { Layout, GasPriceLayout } from "@etherTrack/components";
-import useApi from "@etherTrack/lib/fetcher";
+import { Layout, GasInfoLayout } from "@etherTrack/components";
+import { useApi } from "@etherTrack/lib";
 import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
 } from "@etherTrack/types/ApiTypes";
 import useSWR, { SWRConfig } from "swr";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN}`;
 
 const Index = ({ fallback }) => {
+  const apiEndpoint = "https://api.etherscan.io/api";
   const params: EtherscanGasParams = {
     module: "gastracker",
     action: "gasoracle",
@@ -21,17 +20,14 @@ const Index = ({ fallback }) => {
   const { loading, error, data } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
-  >("https://api.etherscan.io/api", params, { refreshInterval: 5000 });
+  >(apiEndpoint, params, { refreshInterval: 5000 });
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-  console.log(data);
-
-  console.log({ fallback });
   return (
     <SWRConfig value={{ fallback }}>
       <Layout>
-        <GasPriceLayout data={data.result} />
+        <GasInfoLayout data={data.result} />
       </Layout>
     </SWRConfig>
   );
@@ -45,7 +41,7 @@ export async function getServerSideProps() {
   return {
     props: {
       fallback: {
-        gasApiEndpoint: data,
+        "https://api.etherscan.io/api": data,
       },
     },
   };

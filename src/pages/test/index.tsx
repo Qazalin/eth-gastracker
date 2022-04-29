@@ -1,53 +1,85 @@
-import { Layout, GasPriceLayout } from "@etherTrack/components";
-import useApi from "@etherTrack/lib/fetcher";
+import { Layout, GasInfoLayout } from "@etherTrack/components";
+import { APIENDPOINT, useApi, useGasEtimator } from "@etherTrack/lib";
+import { GasInfoLayoutProps } from "@etherTrack/types";
 import {
+  EtherscanGasEstimateRes,
+  EtherscanGasEtimateParams,
   EtherscanGasParams,
   EtherscanGasPriceRes,
 } from "@etherTrack/types/ApiTypes";
-import { ethers } from "ethers";
+import { useState } from "react";
+import useSWR, { SWRConfig } from "swr";
 
-const Index = ({ ssr }) => {
-  const params: EtherscanGasParams = {
+/* TODO: TAKE CARE OF MAX LIMIT */
+
+const Index = ({ fallback }) => {
+  /* handle global states based on individual queries */
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  /* First get the gas prices */
+  const gasPriceParams: EtherscanGasParams = {
     module: "gastracker",
     action: "gasoracle",
     apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
   };
-  const { loading, error, data } = useApi<
+  const { error: gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
-  >("https://api.etherscan.io/api", params);
+  >(APIENDPOINT, gasPriceParams);
 
-  if (loading) return <h1>loding..</h1>;
-  const bn = ethers.utils.parseUnits(data.result.FastGasPrice, "gwei");
-  const w = ethers.utils.formatUnits(bn, "wei");
+  /* Next, based on each of the three gas prices,
+   * fetch the respective estimated confirmation time */
+  const { error: safeGasError, data: safeGasEstimate } = useGasEtimator(
+    gasPrice ? gasPrice.result.SafeGasPrice : null
+  );
+  const { error: proposeGasError, data: proposeGasEstimate } = useGasEtimator(
+    gasPrice ? gasPrice.result.ProposeGasPrice : null
+  );
+  const { error: fastGasError, data: fastGasEstimate } = useGasEtimator(
+    gasPrice ? gasPrice.result.FastGasPrice : null
+  );
 
+  /* The final object that will be exposed to the UI component */
+  let EtherscanRes: GasInfoLayoutProps | undefined;
+  if (safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
+    EtherscanRes = {
+      SafeGasPrice: gasPrice.result.SafeGasPrice,
+      SafeGasEstimate: fastGasEstimate.result,
+      ProposeGasPrice: gasPrice.result.ProposeGasPrice,
+      ProposeGasEstimate: proposeGasEstimate.result,
+      FastGasPrice: gasPrice.result.FastGasPrice,
+      FastGasEstimate: fastGasEstimate.result,
+    };
+  } else if (safeGasError || proposeGasError || fastGasError) {
+    /* set global state to error if any of the queries failed */
+    EtherscanRes = null;
+  } else {
+    EtherscanRes = null;
+  }
+  console.log(EtherscanRes);
   return (
-    <Layout>
-      <h1>hello world</h1>
-    </Layout>
+    // use the ssr fetched data as fallback
+    // data should update every 5 seconds
+    <SWRConfig value={{ fallback, refreshInterval: 6000 }}>
+      <Layout>
+        <GasInfoLayout data={EtherscanRes} />
+      </Layout>
+    </SWRConfig>
   );
 };
 
 export default Index;
 
 export async function getServerSideProps() {
-  const baseUrl = "https://api.etherscan.io/api";
-  const res = await fetch(
-    baseUrl +
-      "?" +
-      new URLSearchParams({
-        module: "gastracker",
-        action: "gasoracle",
-        apiKey: process.env.ETHERSCAN_API_KEY,
-      }),
-    {
-      method: "GET",
-    }
-  );
+  const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.EHERSCAN_API_KEY}`;
+  const res = await fetch(gasApiEndpoint);
   const data: EtherscanGasPriceRes = await res.json();
   return {
     props: {
-      ssr: data,
+      fallback: {
+        "https://api.etherscan.io/api": data,
+      },
     },
   };
 }
