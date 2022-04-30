@@ -34,7 +34,7 @@ const Test = () => {
         refreshWhenHidden: true,
       }}
     >
-      <Countdown time={5} />
+      <Countdown time={5} props={{ fontSize: "2rem" }} />
     </SWRConfig>
   );
 };

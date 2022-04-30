@@ -1,6 +1,7 @@
 import { Box, Center, Text } from "@chakra-ui/react";
 import { GasViewPropType } from "@etherTrack/types";
 import React from "react";
+import { secondsToMins } from "@etherTrack/lib";
 
 export const GasView: React.FC<GasViewPropType> = ({
   title,
@@ -35,7 +36,10 @@ export const GasView: React.FC<GasViewPropType> = ({
         </Text>
         <Text fontSize="1.7rem">{gasPrice} gwei</Text>
         <Text variant="h3" color="text2">
-          ~{estimatedTime}
+          ~
+          {parseInt(estimatedTime) >= 60
+            ? secondsToMins(parseInt(estimatedTime)) + " mins"
+            : estimatedTime + "s"}
         </Text>
       </Center>
     </Box>

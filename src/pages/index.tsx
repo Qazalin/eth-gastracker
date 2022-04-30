@@ -17,7 +17,6 @@ const Index = ({ fallback }) => {
   /* handle global states based on individual queries */
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState<string>();
 
   /* First get the gas prices */
   const gasPriceParams: EtherscanGasParams = {
@@ -41,7 +40,6 @@ const Index = ({ fallback }) => {
   const { error: fastGasError, data: fastGasEstimate } = useGasEtimator(
     gasPrice ? gasPrice.result.FastGasPrice : null
   );
-  console.log(Date.now(), safeGasEstimate);
   /* The final object that will be exposed to the UI component */
   let EtherscanRes: GasInfoLayoutProps | undefined;
   if (gasPrice && safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
@@ -59,8 +57,6 @@ const Index = ({ fallback }) => {
 
   useEffect(() => {
     console.log("refetched!", EtherscanRes);
-    const date = new Date();
-    setLastUpdated(date.toISOString());
   }, [EtherscanRes]);
 
   return (
@@ -86,7 +82,6 @@ const Index = ({ fallback }) => {
           isError={isError}
           isLoading={isLoading}
           data={EtherscanRes}
-          lastUpdated={lastUpdated}
         />
       </Layout>
     </SWRConfig>

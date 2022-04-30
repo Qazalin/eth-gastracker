@@ -1,5 +1,10 @@
 import React from "react";
-export const Countdown: React.FC<{ time: number }> = ({ time }) => {
+import { Box, Text, TextProps } from "@chakra-ui/react";
+
+export const Countdown: React.FC<{ time: number; props?: TextProps }> = ({
+  time,
+  props,
+}) => {
   const [counter, setCounter] = React.useState(time);
 
   // Second Attempts
@@ -14,8 +19,8 @@ export const Countdown: React.FC<{ time: number }> = ({ time }) => {
   }, [counter, time]);
 
   return (
-    <div className="App">
-      <div>Countdown: {counter}</div>
-    </div>
+    <Box>
+      <Text {...props}>Next update in {counter}s</Text>
+    </Box>
   );
 };

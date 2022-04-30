@@ -3,22 +3,26 @@ import {
   EtherscanGasEstimateRes,
   EtherscanGasEtimateParams,
 } from "@etherTrack/types/ApiTypes";
-import { APIENDPOINT } from "@etherTrack/lib";
+import { APIENDPOINT, gweiToWei } from "@etherTrack/lib";
 import { etherscanFetcher } from "../etherscanFetcher";
 
 /**
  * Function to estimate confirmation time
  *
- * @param gasPrice the gas price to be payed
+ * @param gasPrice the gas price to be payed (in gwei)
  * @returns EtherscanGasEstimateRes
  */
 export function useGasEtimator(gasPrice: string | undefined) {
-  const gasEstimateParams: EtherscanGasEtimateParams = {
-    module: "gastracker",
-    action: "gasestimate",
-    gasPrice: gasPrice,
-    apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
-  };
+  console.log(gasPrice);
+  let gasEstimateParams: EtherscanGasEtimateParams;
+  if (gasPrice) {
+    gasEstimateParams = {
+      module: "gastracker",
+      action: "gasestimate",
+      gasPrice: gweiToWei(gasPrice),
+      apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
+    };
+  }
   const { error, data } = useApi<
     EtherscanGasEtimateParams,
     EtherscanGasEstimateRes
