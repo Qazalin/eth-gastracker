@@ -11,4 +11,5 @@ export const etherscanFetcher = async (args: any) => {
   if (data?.result === "Max rate limit reached") {
     throw new Error("Max rate limit reached");
   }
+  return data;
 };

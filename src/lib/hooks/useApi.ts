@@ -26,7 +26,7 @@ export function useApi<ParamsType extends Record<string, string>, ResponseType>(
   const { data, error } = useSWR<ResponseType, unknown>(
     () => endpoint,
     fetcher ? fetcher : basicFetcher,
-    config
+    config ? config : null
   );
 
   return {
