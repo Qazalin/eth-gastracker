@@ -1,5 +1,10 @@
 import { Layout, GasInfoLayout } from "@etherTrack/components";
-import { APIENDPOINT, useApi, useGasEtimator } from "@etherTrack/lib";
+import {
+  APIENDPOINT,
+  useApi,
+  useGasEtimator,
+  etherscanFetcher,
+} from "@etherTrack/lib";
 import { GasInfoLayoutProps } from "@etherTrack/types";
 import {
   EtherscanGasEstimateRes,
@@ -26,7 +31,7 @@ const Index = ({ fallback }) => {
   const { error: gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
-  >(APIENDPOINT, gasPriceParams);
+  >(APIENDPOINT, gasPriceParams, etherscanFetcher);
 
   /* Next, based on each of the three gas prices,
    * fetch the respective estimated confirmation time */
@@ -42,7 +47,7 @@ const Index = ({ fallback }) => {
 
   /* The final object that will be exposed to the UI component */
   let EtherscanRes: GasInfoLayoutProps | undefined;
-  if (safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
+  if (gasPrice && safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
     EtherscanRes = {
       SafeGasPrice: gasPrice.result.SafeGasPrice,
       SafeGasEstimate: fastGasEstimate.result,
@@ -51,12 +56,11 @@ const Index = ({ fallback }) => {
       FastGasPrice: gasPrice.result.FastGasPrice,
       FastGasEstimate: fastGasEstimate.result,
     };
-  } else if (safeGasError || proposeGasError || fastGasError) {
-    EtherscanRes = null;
   } else {
     EtherscanRes = null;
   }
   console.log(EtherscanRes);
+
   return (
     // use the ssr fetched data as fallback
     // data should update every 5 seconds
@@ -82,6 +86,7 @@ const Index = ({ fallback }) => {
 
 export default Index;
 
+/* Data pre-fetching using SSR */
 export async function getServerSideProps() {
   const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.EHERSCAN_API_KEY}`;
   const res = await fetch(gasApiEndpoint);

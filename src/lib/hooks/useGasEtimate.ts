@@ -4,6 +4,7 @@ import {
   EtherscanGasEtimateParams,
 } from "@etherTrack/types/ApiTypes";
 import { APIENDPOINT } from "@etherTrack/lib";
+import { etherscanFetcher } from "../etherscanFetcher";
 
 /**
  * Function to estimate confirmation time
@@ -21,8 +22,12 @@ export function useGasEtimator(gasPrice: string | undefined) {
   const { error, data } = useApi<
     EtherscanGasEtimateParams,
     EtherscanGasEstimateRes
-  >(APIENDPOINT, gasEstimateParams);
+  >(APIENDPOINT, gasEstimateParams, etherscanFetcher);
 
+  /* handle max rate limit of etherscan */
+  if (data?.result === "Max rate limit reached") {
+    console.log("lib: maxRateLimitReached");
+  }
   return {
     data,
     loading: !error && !data,

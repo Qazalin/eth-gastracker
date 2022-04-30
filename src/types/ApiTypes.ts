@@ -1,7 +1,9 @@
-type EtherscanGeneralRes = {
+export interface EtherscanGeneralRes {
   status: "1" | "0";
   message: "OK" | "NOTOK";
-};
+  result: any; // The result is extended in the following interfaces
+}
+
 export interface EtherscanGasPriceRes extends EtherscanGeneralRes {
   result: EtherscanGasResultType;
 }
