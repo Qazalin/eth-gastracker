@@ -7,7 +7,7 @@ import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
 } from "@etherTrack/types/ApiTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 
 /* TODO: TAKE CARE OF MAX LIMIT */
@@ -52,7 +52,6 @@ const Index = ({ fallback }) => {
       FastGasEstimate: fastGasEstimate.result,
     };
   } else if (safeGasError || proposeGasError || fastGasError) {
-    /* set global state to error if any of the queries failed */
     EtherscanRes = null;
   } else {
     EtherscanRes = null;
@@ -61,9 +60,21 @@ const Index = ({ fallback }) => {
   return (
     // use the ssr fetched data as fallback
     // data should update every 5 seconds
-    <SWRConfig value={{ fallback, refreshInterval: 6000 }}>
+    <SWRConfig
+      value={{
+        fallback,
+        refreshInterval: 5000,
+        // handle global error and loading states
+        onError: () => {
+          setIsError(true);
+        },
+        onLoadingSlow: () => {
+          setIsLoading(true);
+        },
+      }}
+    >
       <Layout>
-        <GasInfoLayout data={EtherscanRes} />
+        <GasInfoLayout isError={isError} data={EtherscanRes} />
       </Layout>
     </SWRConfig>
   );
