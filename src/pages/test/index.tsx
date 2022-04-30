@@ -1,4 +1,4 @@
-import { Layout, GasInfoLayout } from "@etherTrack/components";
+import { Layout, Countdown } from "@etherTrack/components";
 import {
   APIENDPOINT,
   useApi,
@@ -34,7 +34,7 @@ const Test = () => {
         refreshWhenHidden: true,
       }}
     >
-      <h1>this is a test </h1>
+      <Countdown time={5} />
     </SWRConfig>
   );
 };
