@@ -7,14 +7,17 @@ import { AppProps } from "next/app";
 // Fonts
 import "@fontsource/lato";
 import "@fontsource/raleway";
+import AdaptivityProvider from "@etherTrack/lib/providers/AdaptivityProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AdaptivityProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AdaptivityProvider>
       </ErrorBoundary>
     </ChakraProvider>
   );
