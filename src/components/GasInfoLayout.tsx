@@ -28,7 +28,7 @@ export const GasInfoLayout: React.FC<{
           <Text>last updated: {cleanDate}</Text>
           <Countdown time={5} />
         </Flex>
-        <HStack spacing="10px" w="100%" h="50%">
+        <HStack flexDir="column" spacing="10px" w="100%" h="100%">
           <GasView
             title="Low"
             gasPrice={data.SafeGasPrice}

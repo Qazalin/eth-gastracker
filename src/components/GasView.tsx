@@ -20,9 +20,10 @@ export const GasView: React.FC<GasViewPropType> = ({
     <Box
       w="100%"
       h="100%"
+      maxW="200px"
       bgGradient="linear(#737DFE, #FFCAC9)"
       borderRadius="24px"
-      p="2%"
+      p="5px"
     >
       <Center
         borderRadius="inherit"

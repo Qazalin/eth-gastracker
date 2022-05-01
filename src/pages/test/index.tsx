@@ -1,10 +1,4 @@
-import { Layout, Countdown, ErrorFallback } from "@etherTrack/components";
-import {
-  APIENDPOINT,
-  useApi,
-  useGasEtimator,
-  etherscanFetcher,
-} from "@etherTrack/lib";
+import { GasInfoLayout } from "@etherTrack/components";
 import { GasInfoLayoutProps } from "@etherTrack/types";
 import {
   EtherscanGasParams,
@@ -14,18 +8,14 @@ import { useEffect, useState } from "react";
 import { SWRConfig } from "swr";
 
 const Test = () => {
-  const gasPriceParams: EtherscanGasParams = {
-    module: "gastracker",
-    action: "gasoracle",
-    apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
+  const dummy: GasInfoLayoutProps = {
+    SafeGasPrice: "213",
+    SafeGasEstimate: "45",
+    ProposeGasPrice: "213",
+    ProposeGasEstimate: "195",
+    FastGasPrice: "215",
+    FastGasEstimate: "45",
   };
-  const { error: gasPriceError, data: gasPrice } = useApi<
-    EtherscanGasParams,
-    EtherscanGasPriceRes
-  >(APIENDPOINT, gasPriceParams, etherscanFetcher);
-  if (gasPrice) {
-    console.log(gasPrice);
-  }
-  return <ErrorFallback error="dummy error" resetErrorBoundary={() => "no"} />;
+  return <GasInfoLayout data={dummy} isError={false} isLoading={false} />;
 };
 export default Test;
