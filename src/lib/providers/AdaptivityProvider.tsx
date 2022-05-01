@@ -8,7 +8,7 @@ type Props = {
 
 export const AdaptivityContext = React.createContext<boolean>(false);
 const AdaptivityProvider: React.FC<Props> = ({ children }) => {
-  const isMobile = useWindowDimensions(BREAKPOINTS.md);
+  const isMobile = useWindowDimensions(1200);
   const mobileContext = useMemo(() => isMobile, [isMobile]);
   if (mobileContext !== null) {
     return (

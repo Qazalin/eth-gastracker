@@ -11,8 +11,9 @@ export type MainLayoutProps = {
 };
 export type GasViewPropType = {
   title: "Low" | "Average" | "High";
-  gasPrice: string;
-  estimatedTime: string;
+  gasPrice: number;
+  estimatedTime: number;
+  percentageDiff: number;
 };
 
 /* For displaying the gas information in the UI

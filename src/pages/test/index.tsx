@@ -17,7 +17,7 @@ const Test = () => {
   };
   return (
     <LayoutManager
-      gasPrice={<GasInfoLayout />}
+      gasPrice={<GasInfoLayout data={dummy} />}
       barChart={<Box />}
       stats={<Box />}
     />

@@ -1,34 +1,44 @@
 import { Box, HStack, CircularProgress } from "@chakra-ui/react";
-export const GasInfoLayout = () => {
-  return (
-    <HStack w="100%" h="100%">
-      <CircularProgress
-        color="#FC759F"
-        size="100%"
-        w="40%"
-        h="100%"
-        thickness="8px"
-        trackColor="#494F56"
-        value={90}
-      />
-      <CircularProgress
-        color="#9DABF2"
-        size="100%"
-        w="40%"
-        h="100%"
-        thickness="8px"
-        value={90}
-        trackColor="#494F56"
-      />
-      <CircularProgress
-        color="#A17AC9"
-        size="100%"
-        w="40%"
-        h="100%"
-        thickness="8px"
-        value={90}
-        trackColor="#494F56"
-      />
-    </HStack>
-  );
+import { GasView } from "@etherTrack/components";
+import { GasInfoLayoutProps } from "@etherTrack/types";
+import { getPercentageDiff } from "@etherTrack/utils";
+export const GasInfoLayout: React.FC<{
+  data: GasInfoLayoutProps | undefined;
+}> = ({ data }) => {
+  const gasPrices = [
+    parseInt(data.SafeGasPrice),
+    parseInt(data.ProposeGasPrice),
+    parseInt(data.FastGasPrice),
+  ];
+  const estimatedTimes = [
+    parseInt(data.SafeGasEstimate),
+    parseInt(data.ProposeGasEstimate),
+    parseInt(data.FastGasEstimate),
+  ];
+  if (data) {
+    return (
+      <HStack w="100%" h="100%">
+        <GasView
+          title="Low"
+          gasPrice={gasPrices[0]}
+          estimatedTime={estimatedTimes[0]}
+          percentageDiff={getPercentageDiff(gasPrices, gasPrices[0])}
+        />
+        <GasView
+          title="Average"
+          gasPrice={gasPrices[1]}
+          estimatedTime={estimatedTimes[1]}
+          percentageDiff={getPercentageDiff(gasPrices, gasPrices[1])}
+        />
+        <GasView
+          title="High"
+          gasPrice={gasPrices[2]}
+          estimatedTime={estimatedTimes[2]}
+          percentageDiff={getPercentageDiff(gasPrices, gasPrices[2])}
+        />
+      </HStack>
+    );
+  } else {
+    return <h1>skeleton layout</h1>;
+  }
 };
