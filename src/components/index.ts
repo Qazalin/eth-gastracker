@@ -3,3 +3,4 @@ export * from "./GasView";
 export * from "./DarkModeSwitch";
 export * from "./GasInfoLayout";
 export * from "./Countdown";
+export * from "./ErrorFallback";

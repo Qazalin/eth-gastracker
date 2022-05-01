@@ -18,7 +18,7 @@ export const GasInfoLayout: React.FC<{
     const cleanDate = dateSplits[0] + " " + dateSplits[1].slice(0, 8); // format: yy-mm-dd hh-mm-ss
 
     return (
-      <Box w="100%" h="100%">
+      <Box w="100%" maxW="50%" h="100%">
         <Flex
           justifyContent="space-between"
           fontSize="1.2rem"

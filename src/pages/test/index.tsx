@@ -1,4 +1,4 @@
-import { Layout, Countdown } from "@etherTrack/components";
+import { Layout, Countdown, ErrorFallback } from "@etherTrack/components";
 import {
   APIENDPOINT,
   useApi,
@@ -26,16 +26,6 @@ const Test = () => {
   if (gasPrice) {
     console.log(gasPrice);
   }
-  return (
-    <SWRConfig
-      value={{
-        refreshInterval: 5000,
-        dedupingInterval: 50,
-        refreshWhenHidden: true,
-      }}
-    >
-      <Countdown time={5} props={{ fontSize: "2rem" }} />
-    </SWRConfig>
-  );
+  return <ErrorFallback error="dummy error" resetErrorBoundary={() => "no"} />;
 };
 export default Test;
