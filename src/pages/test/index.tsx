@@ -1,11 +1,5 @@
 import { GasInfoLayout } from "@etherTrack/components";
 import { GasInfoLayoutProps } from "@etherTrack/types";
-import {
-  EtherscanGasParams,
-  EtherscanGasPriceRes,
-} from "@etherTrack/types/ApiTypes";
-import { useEffect, useState } from "react";
-import { SWRConfig } from "swr";
 
 const Test = () => {
   const dummy: GasInfoLayoutProps = {
@@ -16,6 +10,6 @@ const Test = () => {
     FastGasPrice: "215",
     FastGasEstimate: "45",
   };
-  return <GasInfoLayout data={dummy} isError={false} isLoading={false} />;
+  return <GasInfoLayout data={dummy} />;
 };
 export default Test;

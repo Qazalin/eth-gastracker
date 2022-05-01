@@ -10,34 +10,30 @@ import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
 } from "@etherTrack/types/ApiTypes";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SWRConfig } from "swr";
 
 const Index = ({ fallback }) => {
-  /* handle global states based on individual queries */
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
   /* First get the gas prices */
   const gasPriceParams: EtherscanGasParams = {
     module: "gastracker",
     action: "gasoracle",
     apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
   };
-  const { error: gasPriceError, data: gasPrice } = useApi<
+  const { error: _gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
   >(APIENDPOINT, gasPriceParams, etherscanFetcher);
 
   /* Next, based on each of the three gas prices,
    * fetch the respective estimated confirmation time */
-  const { error: safeGasError, data: safeGasEstimate } = useGasEtimator(
+  const { error: _safeGasError, data: safeGasEstimate } = useGasEtimator(
     gasPrice ? gasPrice.result.SafeGasPrice : null
   );
-  const { error: proposeGasError, data: proposeGasEstimate } = useGasEtimator(
+  const { error: _proposeGasError, data: proposeGasEstimate } = useGasEtimator(
     gasPrice ? gasPrice.result.ProposeGasPrice : null
   );
-  const { error: fastGasError, data: fastGasEstimate } = useGasEtimator(
+  const { error: _fastGasError, data: fastGasEstimate } = useGasEtimator(
     gasPrice ? gasPrice.result.FastGasPrice : null
   );
   /* The final object that will be exposed to the UI component */
@@ -67,22 +63,10 @@ const Index = ({ fallback }) => {
         fallback,
         refreshInterval: 2000,
         dedupingInterval: 1000,
-        // handle global error and loading states
-        onError: () => {
-          setIsError(true);
-        },
-        onLoadingSlow: () => {
-          setIsLoading(true);
-        },
-        loadingTimeout: 1000,
       }}
     >
       <Layout>
-        <GasInfoLayout
-          isError={isError}
-          isLoading={isLoading}
-          data={EtherscanRes}
-        />
+        <GasInfoLayout data={EtherscanRes} />
       </Layout>
     </SWRConfig>
   );

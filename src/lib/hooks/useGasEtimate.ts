@@ -13,7 +13,6 @@ import { etherscanFetcher } from "../etherscanFetcher";
  * @returns EtherscanGasEstimateRes
  */
 export function useGasEtimator(gasPrice: string | undefined) {
-  console.log(gasPrice);
   let gasEstimateParams: EtherscanGasEtimateParams;
   if (gasPrice) {
     gasEstimateParams = {
@@ -30,7 +29,7 @@ export function useGasEtimator(gasPrice: string | undefined) {
 
   /* handle max rate limit of etherscan */
   if (data?.result === "Max rate limit reached") {
-    console.log("lib: maxRateLimitReached");
+    throw new Error("Max rate limit reached");
   }
   return {
     data,

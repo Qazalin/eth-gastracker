@@ -5,13 +5,9 @@ import { GasInfoLayoutProps } from "@etherTrack/types";
 
 export const GasInfoLayout: React.FC<{
   data: GasInfoLayoutProps | undefined;
-  isError: boolean;
-  isLoading: boolean;
-}> = ({ data, isError, isLoading }) => {
+}> = ({ data }) => {
   const toast = useToast();
-  if (isError) {
-    return <h1>sorry, there was an error</h1>;
-  } else if (data) {
+  if (data) {
     const d = new Date();
     const lastUpdated = d.toISOString();
     const dateSplits = lastUpdated.split("T");
@@ -48,6 +44,7 @@ export const GasInfoLayout: React.FC<{
       </Box>
     );
   } else {
+    // if there wasn't any data, the app is loading since the error is being handled in the ErrorBoundary
     return (
       <HStack spacing="10px" w="100%" h="50%">
         <GasViewGhost />
