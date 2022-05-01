@@ -14,7 +14,7 @@ export const GasInfoLayout: React.FC<{
     const cleanDate = dateSplits[0] + " " + dateSplits[1].slice(0, 8); // format: yy-mm-dd hh-mm-ss
 
     return (
-      <Box w="100%" maxW="50%" h="100%">
+      <Box w="50%" h="20%">
         <Flex
           justifyContent="space-between"
           fontSize="1.2rem"
@@ -24,7 +24,7 @@ export const GasInfoLayout: React.FC<{
           <Text>last updated: {cleanDate}</Text>
           <Countdown time={5} />
         </Flex>
-        <HStack flexDir="column" spacing="10px" w="100%" h="100%">
+        <HStack spacing="10px" w="100%" h="100%">
           <GasView
             title="Low"
             gasPrice={data.SafeGasPrice}
