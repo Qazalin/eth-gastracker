@@ -1,4 +1,14 @@
-import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const d = {
   SafeGasPrice: "213",
@@ -14,10 +24,15 @@ const data = [
   { name: "High", value: d.FastGasEstimate },
 ];
 
-export const BarChart = () => {
+export const ConfirmationTimeChart = () => {
   return (
     <ResponsiveContainer width={700} height="80%">
-      <PieChart></PieChart>
+      <BarChart width={150} height={40} data={data}>
+        <CartesianGrid opacity={0.1} vertical={false} />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Bar dataKey="value" fill="#8884d8" />
+      </BarChart>
     </ResponsiveContainer>
   );
 };

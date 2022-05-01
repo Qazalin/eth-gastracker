@@ -4,7 +4,10 @@ import {
 } from "@etherTrack/components/layouts/main";
 import { GasInfoLayoutProps } from "@etherTrack/types";
 import { Box } from "@chakra-ui/react";
-import { DonutChart } from "@etherTrack/components/charts";
+import {
+  ConfirmationTimeChart,
+  DonutChart,
+} from "@etherTrack/components/charts";
 
 const Test = () => {
   const dummy: GasInfoLayoutProps = {
@@ -18,7 +21,7 @@ const Test = () => {
   return (
     <LayoutManager
       gasPrice={<GasInfoLayout data={dummy} />}
-      barChart={<Box />}
+      barChart={<ConfirmationTimeChart />}
       stats={<Box />}
     />
   );
