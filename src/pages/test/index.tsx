@@ -1,7 +1,10 @@
-import { GasInfoLayout } from "@etherTrack/components";
-import { MainLayout } from "@etherTrack/components/layout/main";
+import {
+  LayoutManager,
+  GasInfoLayout,
+} from "@etherTrack/components/layouts/main";
 import { GasInfoLayoutProps } from "@etherTrack/types";
-import { Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { DonutChart } from "@etherTrack/components/charts";
 
 const Test = () => {
   const dummy: GasInfoLayoutProps = {
@@ -13,9 +16,11 @@ const Test = () => {
     FastGasEstimate: "45",
   };
   return (
-    <MainLayout>
-      <Text>hello world</Text>
-    </MainLayout>
+    <LayoutManager
+      gasPrice={<GasInfoLayout />}
+      barChart={<Box />}
+      stats={<Box />}
+    />
   );
 };
 export default Test;
