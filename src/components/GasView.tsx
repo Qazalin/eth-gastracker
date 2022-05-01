@@ -29,17 +29,27 @@ export const GasView: React.FC<GasViewPropType> = ({
   const value = percentageDiff == 0 ? 100 : 100 - percentageDiff;
 
   return (
-    <Box w="40%" h="100%" display={isMobile ? "normal" : "flex"}>
-      <Box>
+    <Box
+      w="100%"
+      h="100%"
+      display={isMobile ? "normal" : "flex"}
+      textAlign="center"
+    >
+      <Box pos="relative">
         <Text variant="h1" fontFamily="body" fontWeight="normal">
           {title}
         </Text>
-        <Text minW="70px">{gasPrice} gwei</Text>
-        <Text minW="80px" color="text2">
-          {estimatedTime >= 60
-            ? secondsToMins(estimatedTime) + " " + "mins"
-            : estimatedTime + " " + "seconds"}
-        </Text>
+        <Box
+          pos={isMobile ? "initial" : "absolute"}
+          bottom={isMobile ? "none" : 0}
+        >
+          <Text minW="70px">{gasPrice} gwei</Text>
+          <Text minW="80px" color="text2">
+            {estimatedTime >= 60
+              ? secondsToMins(estimatedTime) + " " + "mins"
+              : estimatedTime + " " + "seconds"}
+          </Text>
+        </Box>
       </Box>
       <CircularProgress
         color={color}

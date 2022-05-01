@@ -7,7 +7,7 @@ export const DesktopLayout: React.FC<MainLayoutProps> = ({
 }) => {
   return (
     <Flex w="100%" h="100%" borderRadius="10px">
-      <VStack w="50%" h="100%" borderRadius="inherit">
+      <VStack w="100%" h="100%" borderRadius="inherit">
         <Box
           borderRadius="inherit"
           w="100%"
