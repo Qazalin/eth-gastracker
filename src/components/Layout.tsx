@@ -26,7 +26,7 @@ export const Layout: React.FC<LayoutPropType> = ({ children }) => {
         <Text>last updated: {cleanDate}</Text>
         <Countdown time={5} />
       </Flex>
-      <Box mt="10px" w="100%" h="calc(100vh - 200px)">
+      <Box mt="10px" w="100%" h="85%">
         {children}
       </Box>
     </Box>

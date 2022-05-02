@@ -1,9 +1,9 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import { Tooltip as CustomTooltip } from "./Tooltip";
 
-export const GeneralGradientBar = ({ color1, color2, data, id }) => {
+export const GradientBarChart = ({ color1, color2, data, id, xKey, yKey }) => {
   return (
-    <BarChart width={600} height={300} data={data}>
+    <BarChart width={900} height={300} data={data}>
       <defs>
         <linearGradient
           id={id}
@@ -17,10 +17,10 @@ export const GeneralGradientBar = ({ color1, color2, data, id }) => {
           <stop offset="1" stopColor={color2} />
         </linearGradient>
       </defs>
-      <XAxis dataKey="name" axisLine={false} tickLine={false} />
+      <XAxis dataKey={xKey} axisLine={false} tickLine={false} />
       <YAxis axisLine={false} tickLine={false} />
       <Tooltip content={<CustomTooltip />} cursor={false} />
-      <Bar dataKey="uv" fill={`url(#${id})`} barSize={30} />
+      <Bar dataKey={yKey} fill={`url(#${id})`} barSize={30} />
     </BarChart>
   );
 };

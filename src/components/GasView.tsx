@@ -36,9 +36,7 @@ export const GasView: React.FC<GasViewPropType> = ({
       textAlign="center"
     >
       <Box pos="relative">
-        <Text variant="h1" fontFamily="body" fontWeight="normal">
-          {title}
-        </Text>
+        <Text variant="h2">{title}</Text>
         <Box
           pos={isMobile ? "initial" : "absolute"}
           bottom={isMobile ? "none" : 0}

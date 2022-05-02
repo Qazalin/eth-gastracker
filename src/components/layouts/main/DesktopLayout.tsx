@@ -1,4 +1,4 @@
-import { Flex, VStack, Box } from "@chakra-ui/react";
+import { Flex, VStack, Box, Center } from "@chakra-ui/react";
 import { MainLayoutProps } from "@etherTrack/types";
 export const DesktopLayout: React.FC<MainLayoutProps> = ({
   gasPrice,
