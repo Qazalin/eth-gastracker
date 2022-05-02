@@ -2,7 +2,7 @@ import {
   LayoutManager,
   GasInfoLayout,
   ConfirmationChartLayout,
-} from "@etherTrack/components/layouts/main";
+} from "@etherTrack/layouts/main";
 import { GasInfoLayoutProps } from "@etherTrack/types";
 import { Box } from "@chakra-ui/react";
 import { ConfirmationTimeChart } from "@etherTrack/components/charts";

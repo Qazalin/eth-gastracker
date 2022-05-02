@@ -1,13 +1,19 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback, Layout } from "@etherTrack/components";
-import { theme } from "@etherTrack/ui";
-import { AppProps } from "next/app";
+// Modules //
+import { ChakraProvider } from "@chakra-ui/react"
+import { ErrorBoundary } from "react-error-boundary"
+import { AppProps } from "next/app"
 
-// Fonts
-import "@fontsource/lato";
-import "@fontsource/raleway";
-import AdaptivityProvider from "@etherTrack/lib/providers/AdaptivityProvider";
+// Fonts //
+import "@fontsource/lato"
+import "@fontsource/raleway"
+
+// Components //
+import { ErrorFallback } from "@etherTrack/components"
+import { Layout } from "@etherTrack/layouts"
+import { theme } from "@etherTrack/ui"
+
+// Providers //
+import AdaptivityProvider from "@etherTrack/lib/providers/AdaptivityProvider"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </AdaptivityProvider>
       </ErrorBoundary>
     </ChakraProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

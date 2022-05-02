@@ -1,14 +1,17 @@
-import { Flex, Box, Text } from "@chakra-ui/react";
-import { LayoutPropType } from "@etherTrack/types";
-import React from "react";
-import { DarkModeSwitch } from "./DarkModeSwitch";
-import { Countdown } from "@etherTrack/components";
+import { Flex, Box, Text } from "@chakra-ui/react"
+import { LayoutPropType } from "@etherTrack/types"
+import React from "react"
+import { DarkModeSwitch } from "../components/DarkModeSwitch"
+import { Countdown } from "@etherTrack/components"
 
+/**
+ * The primary layout used in the _app.tsx page
+ */
 export const Layout: React.FC<LayoutPropType> = ({ children }) => {
-  const d = new Date();
-  const lastUpdated = d.toISOString();
-  const dateSplits = lastUpdated.split("T");
-  const cleanDate = dateSplits[0] + " " + dateSplits[1].slice(0, 8); // format: yy-mm-dd hh-mm-ss
+  const d = new Date()
+  const lastUpdated = d.toISOString()
+  const dateSplits = lastUpdated.split("T")
+  const cleanDate = dateSplits[0] + " " + dateSplits[1].slice(0, 8) // format: yy-mm-dd hh-mm-ss
   return (
     <Box w="100vw" h="100vh" p="40px">
       <Box w="100%" h="100px">
@@ -30,5 +33,5 @@ export const Layout: React.FC<LayoutPropType> = ({ children }) => {
         {children}
       </Box>
     </Box>
-  );
-};
+  )
+}

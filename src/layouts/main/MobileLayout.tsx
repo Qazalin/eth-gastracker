@@ -1,23 +1,23 @@
-import React from "react";
-import { MainLayoutProps } from "@etherTrack/types";
-import { VStack, Box } from "@chakra-ui/react";
+import React from "react"
+import { MainLayoutProps } from "@etherTrack/types"
+import { VStack, Box } from "@chakra-ui/react"
 
 export const MobileLayout: React.FC<MainLayoutProps> = ({
-  gasPrice,
-  barChart,
-  stats,
+  gasPriceLayout,
+  barChartLayout,
+  statsLayout,
 }) => {
   return (
     <VStack spacing={5} w="100%" h="100%" borderRadius="10px">
       <Box borderRadius="inherit" w="100%" h="100%" bg="bg1" p="20px">
-        {gasPrice}
+        {gasPriceLayout}
       </Box>
       <Box borderRadius="inherit" w="100%" h="100%" bg="bg1">
-        {barChart}
+        {barChartLayout}
       </Box>
       <Box borderRadius="inherit" w="100%" h="100%" ml="20px" bg="bg1">
-        {stats}
+        {statsLayout}
       </Box>
     </VStack>
-  );
-};
+  )
+}

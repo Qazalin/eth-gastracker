@@ -25,8 +25,8 @@ export const GasView: React.FC<GasViewPropType> = ({
     High: "#A17AC9",
   };
 
-  const color = colors[title];
-  const value = percentageDiff == 0 ? 100 : 100 - percentageDiff;
+  const color = colors[title]; // color for the illustration
+  const value = percentageDiff == 0 ? 100 : 100 - percentageDiff; // calculate based on difference with 100%
 
   return (
     <Box

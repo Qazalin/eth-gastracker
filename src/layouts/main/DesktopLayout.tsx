@@ -1,9 +1,9 @@
-import { Flex, VStack, Box, Center } from "@chakra-ui/react";
-import { MainLayoutProps } from "@etherTrack/types";
+import { Flex, VStack, Box, Center } from "@chakra-ui/react"
+import { MainLayoutProps } from "@etherTrack/types"
 export const DesktopLayout: React.FC<MainLayoutProps> = ({
-  gasPrice,
-  barChart,
-  stats,
+  gasPriceLayout,
+  barChartLayout,
+  statsLayout,
 }) => {
   return (
     <Flex w="100%" h="100%" borderRadius="10px">
@@ -16,15 +16,15 @@ export const DesktopLayout: React.FC<MainLayoutProps> = ({
           mb="20px"
           p="20px"
         >
-          {gasPrice}
+          {gasPriceLayout}
         </Box>
         <Box borderRadius="inherit" w="100%" h="80%" bg="bg1">
-          {barChart}
+          {barChartLayout}
         </Box>
       </VStack>
       <Box borderRadius="inherit" w="50%" h="100%" ml="20px" bg="bg1">
-        {stats}
+        {statsLayout}
       </Box>
     </Flex>
-  );
-};
+  )
+}
