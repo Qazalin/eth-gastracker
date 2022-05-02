@@ -1,5 +1,6 @@
-import { Flex, VStack, Box, Center } from "@chakra-ui/react"
-import { MainLayoutProps } from "@etherTrack/types"
+import { Flex, VStack, Box, Center } from "@chakra-ui/react";
+import { MainLayoutProps } from "@etherTrack/types";
+
 export const DesktopLayout: React.FC<MainLayoutProps> = ({
   gasPriceLayout,
   barChartLayout,
@@ -26,5 +27,5 @@ export const DesktopLayout: React.FC<MainLayoutProps> = ({
         {statsLayout}
       </Box>
     </Flex>
-  )
-}
+  );
+};

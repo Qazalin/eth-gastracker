@@ -23,8 +23,6 @@ export const theme = extendTheme({
         // animation for change color mode
         // transition: "background 2s",
         transition: "none",
-        overflow: "hidden",
-
         // ( light - dark )
         color: mode("gray.800", "whiteAlpha.900")(props),
         // bg: mode("gray.100", "gray.800")(props),
