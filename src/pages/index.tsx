@@ -1,4 +1,3 @@
-import { Layout, GasInfoLayout } from "@etherTrack/components";
 import {
   APIENDPOINT,
   useApi,
@@ -65,9 +64,7 @@ const Index = ({ fallback }) => {
         dedupingInterval: 1000,
       }}
     >
-      <Layout>
-        <GasInfoLayout data={EtherscanRes} />
-      </Layout>
+      <div>hi</div>
     </SWRConfig>
   );
 };

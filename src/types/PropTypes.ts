@@ -35,3 +35,10 @@ export type DonutChartProps = {
   deltaTime: number;
   sx: CircularProgressProps;
 };
+
+/**
+ * [Low, Average, High]
+ */
+export type ConfirmationTimeChartProps = {
+  data: [number, number, number];
+};
