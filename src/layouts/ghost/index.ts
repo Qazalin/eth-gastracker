@@ -1,1 +1,2 @@
-export * from "./GasViewGhost";
+export * from "./DesktopGhostLayout";
+export * from "./MobileGhostLayout";
