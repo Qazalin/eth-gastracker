@@ -1,4 +1,4 @@
-import { ConfirmationTimeChartProps } from "@etherTrack/types"
+import { ConfirmationTimeChartProps } from "@etherTrack/types";
 import {
   BarChart,
   Bar,
@@ -7,22 +7,22 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from "recharts"
+} from "recharts";
 
 /**
  * A bar chart for illustrating estimated confirmation time for the three categories of gas prices: Low, Average and High
  * @param data An array of estimatedTimes
  */
-export const ConfirmationTimeChart: React.FC<{ data: ConfirmationTimeChartProps }> = ({
-  data: d,
-}) => {
+export const ConfirmationTimeChart: React.FC<{
+  data: ConfirmationTimeChartProps;
+}> = ({ data: d }) => {
   const data = [
     { name: "Low", time: d[0] },
     { name: "Average", time: d[1] },
     { name: "High", time: d[2] },
-  ]
+  ];
   // The id used for gradient
-  const id = "cost-estimation-bar"
+  const id = "cost-estimation-bar";
 
   return (
     <ResponsiveContainer width={"90%"} height={"70%"}>
@@ -48,8 +48,13 @@ export const ConfirmationTimeChart: React.FC<{ data: ConfirmationTimeChartProps 
         <CartesianGrid opacity={0.1} vertical={false} />
         <XAxis dataKey="name" />
         <YAxis />
-        <Bar dataKey="time" stroke="#FC759E" fill={`url(#${id})`} />
+        <Bar
+          radius={[25, 25, 0, 0]}
+          dataKey="time"
+          stroke="#FC759E"
+          fill={`url(#${id})`}
+        />
       </BarChart>
     </ResponsiveContainer>
-  )
-}
+  );
+};

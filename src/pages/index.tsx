@@ -23,6 +23,7 @@ import {
   LayoutManager,
   GasInfoLayout,
   ConfirmationChartLayout,
+  NetworkStatsLayout,
 } from "@etherTrack/layouts";
 import { Countdown } from "@etherTrack/components";
 
@@ -53,6 +54,7 @@ const Index = ({ fallback }) => {
   /* The final object that will be exposed to the UI component */
   let EtherscanRes: IsolatedLayoutProps | undefined;
   if (gasPrice && safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
+    const gasUsedRatio = gasPrice.result.gasUsedRatio.split(",").map(Number);
     EtherscanRes = {
       SafeGasPrice: parseInt(gasPrice.result.SafeGasPrice),
       SafeGasEstimate: parseInt(fastGasEstimate.result),
@@ -60,6 +62,8 @@ const Index = ({ fallback }) => {
       ProposeGasEstimate: parseInt(proposeGasEstimate.result),
       FastGasPrice: parseInt(gasPrice.result.FastGasPrice),
       FastGasEstimate: parseInt(fastGasEstimate.result),
+      suggestBaseFee: parseInt(gasPrice.result.suggestBaseFee),
+      gasUsedRatio: gasUsedRatio,
     };
   } else {
     EtherscanRes = null;
@@ -96,7 +100,7 @@ const Index = ({ fallback }) => {
       <LayoutManager
         gasPriceLayout={<GasInfoLayout data={EtherscanRes} />}
         barChartLayout={<ConfirmationChartLayout data={EtherscanRes} />}
-        statsLayout={<Box />}
+        statsLayout={<NetworkStatsLayout data={EtherscanRes} />}
         isLoading={EtherscanRes === null}
       />
     </SWRConfig>

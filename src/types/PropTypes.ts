@@ -30,11 +30,16 @@ type GasUIResultTypes = "price" | "estimate";
 /* Gas types based on etherscan's res */
 type gasType = "Safe" | "Propose" | "Fast";
 
-/* Final UI props for all the three individual layouts */
-export type IsolatedLayoutProps = Record<
+export type GasDataProps = Record<
   `${gasType}Gas${Capitalize<GasUIResultTypes>}`,
   number
 >;
+
+/* Final UI props for all the three individual layouts */
+export interface IsolatedLayoutProps extends GasDataProps {
+  suggestBaseFee: number;
+  gasUsedRatio: number[];
+}
 
 export type DonutChartProps = {
   value: number;
@@ -46,3 +51,9 @@ export type DonutChartProps = {
  * [Low, Average, High]
  */
 export type ConfirmationTimeChartProps = [number, number, number];
+
+export type NetworkStatsLayoutProps = {
+  suggestedBaseFeeGwei: number;
+  suggestedBaseFeeUSD: number;
+  gasUsedRatio: number[];
+};
