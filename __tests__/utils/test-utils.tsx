@@ -9,11 +9,16 @@ import { theme } from "@etherTrack/ui";
 import AdaptivityProvider from "@etherTrack/lib/providers/AdaptivityProvider";
 import { LayoutPropType } from "@etherTrack/types";
 import { ReactElement } from "react";
+import { SWRConfig } from "swr";
 
 const Providers: React.FC<LayoutPropType> = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
-      <AdaptivityProvider>{children}</AdaptivityProvider>
+      <AdaptivityProvider>
+        <SWRConfig value={{ dedupingInterval: 0, provider: () => new Map() }}>
+          {children}
+        </SWRConfig>
+      </AdaptivityProvider>
     </ChakraProvider>
   );
 };

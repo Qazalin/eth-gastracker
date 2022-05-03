@@ -3,7 +3,7 @@ import {
   EtherscanGasEstimateRes,
   EtherscanGasEtimateParams,
 } from "@etherTrack/types/ApiTypes";
-import { APIENDPOINT, gweiToWei } from "@etherTrack/lib";
+import { ETHERSCAN_APIENDPOINT, gweiToWei } from "@etherTrack/lib";
 import { etherscanFetcher } from "../etherscanFetcher";
 
 /**
@@ -25,7 +25,7 @@ export function useGasEtimator(gasPrice: string | undefined) {
   const { error, data } = useApi<
     EtherscanGasEtimateParams,
     EtherscanGasEstimateRes
-  >(APIENDPOINT, gasEstimateParams, etherscanFetcher);
+  >(ETHERSCAN_APIENDPOINT, gasEstimateParams, etherscanFetcher);
 
   /* handle max rate limit of etherscan */
   if (data?.result === "Max rate limit reached") {

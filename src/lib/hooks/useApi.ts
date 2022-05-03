@@ -1,5 +1,6 @@
 import { basicFetcher } from "../basicFetcher";
 import useSWR, { SWRConfiguration } from "swr";
+import { apiParamEndpoint } from "@etherTrack/utils";
 
 /**
  * Re-usable SWR api implementation.
@@ -16,13 +17,8 @@ export function useApi<ParamsType extends Record<string, string>, ResponseType>(
   fetcher?: (args: any) => any,
   config?: SWRConfiguration
 ): { loading: boolean; error: unknown; data: ResponseType } {
-  const usp = new URLSearchParams(params);
-
-  // Create a stable key for SWR
-  usp.sort();
-  const qs = usp.toString();
-
-  const endpoint = `${url}?${qs}`;
+  let endpoint: string;
+  if (url) endpoint = apiParamEndpoint(url, params);
   const { data, error } = useSWR<ResponseType, unknown>(
     () => endpoint,
     fetcher ? fetcher : basicFetcher,

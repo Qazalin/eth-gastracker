@@ -16,6 +16,7 @@ const cutomJestConfig: Config.InitialOptions = {
     compileOptions.compilerOptions.paths,
     { prefix: "<rootDir>/src/" }
   ),
+  modulePathIgnorePatterns: ["<rootDir>/__tests__/utils"],
 };
 
 export default createJestConfig(cutomJestConfig);

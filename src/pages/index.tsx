@@ -1,11 +1,11 @@
 // Modules //
-import { useEffect } from "react";
 import { SWRConfig } from "swr";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 // API Fetching related //
 import {
-  APIENDPOINT,
+  ETHERSCAN_APIENDPOINT,
+  GASPRICE_PARAMS,
   useApi,
   useGasEtimator,
   etherscanFetcher,
@@ -16,6 +16,7 @@ import { IsolatedLayoutProps } from "@etherTrack/types";
 import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
+  EtherscanGasResultType,
 } from "@etherTrack/types/ApiTypes";
 
 // Components //
@@ -26,18 +27,15 @@ import {
   NetworkStatsLayout,
 } from "@etherTrack/layouts";
 import { Countdown } from "@etherTrack/components";
+import { GetServerSideProps } from "next";
+import { useEffect } from "react";
 
 const Index = ({ fallback }) => {
   /* First get the gas prices */
-  const gasPriceParams: EtherscanGasParams = {
-    module: "gastracker",
-    action: "gasoracle",
-    apiKey: process.env.NEXT_PUBLIC_ETHERSCAN,
-  };
   const { error: _gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
-  >(APIENDPOINT, gasPriceParams, etherscanFetcher);
+  >(ETHERSCAN_APIENDPOINT, GASPRICE_PARAMS, etherscanFetcher);
 
   /* Next, based on each of the three gas prices,
    * fetch the respective estimated confirmation time */
@@ -69,10 +67,7 @@ const Index = ({ fallback }) => {
     EtherscanRes = null;
   }
 
-  useEffect(() => {
-    console.log(EtherscanRes);
-  }, [EtherscanRes]);
-
+  /* last updated date and time */
   const d = new Date();
   const lastUpdated = d.toISOString();
   const dateSplits = lastUpdated.split("T");
@@ -110,10 +105,10 @@ const Index = ({ fallback }) => {
 export default Index;
 
 /* Data pre-fetching using SSR */
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.EHERSCAN_API_KEY}`;
   const res = await fetch(gasApiEndpoint);
-  const data: EtherscanGasPriceRes = await res.json();
+  const data: EtherscanGasResultType = await res.json();
   return {
     props: {
       fallback: {
@@ -121,4 +116,4 @@ export async function getServerSideProps() {
       },
     },
   };
-}
+};
