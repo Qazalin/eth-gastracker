@@ -28,7 +28,7 @@ import {
 } from "@etherTrack/layouts";
 import { Countdown } from "@etherTrack/components";
 import { GetServerSideProps } from "next";
-import { useEffect } from "react";
+import { basicFetcher } from "@etherTrack/lib/basicFetcher";
 
 const Index = ({ fallback }) => {
   /* First get the gas prices */
@@ -81,6 +81,7 @@ const Index = ({ fallback }) => {
         fallback,
         refreshInterval: 5000,
         dedupingInterval: 1000,
+        fetcher: basicFetcher,
       }}
     >
       <Flex

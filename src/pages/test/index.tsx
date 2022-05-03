@@ -1,10 +1,4 @@
-import {
-  LayoutManager,
-  GasInfoLayout,
-  ConfirmationChartLayout,
-} from "@etherTrack/layouts/main";
-import { Box } from "@chakra-ui/react";
-import { ConfirmationTimeChart } from "@etherTrack/components/charts";
+import { NetworkTrafficBar } from "@etherTrack/components/charts";
 
 const Test = () => {
   const dummy = {
@@ -16,6 +10,6 @@ const Test = () => {
     FastGasEstimate: "45",
   };
   const barChartData: [number, number, number] = [134, 235, 100];
-  return <h1>first test</h1>;
+  return <NetworkTrafficBar avgTraffic={0.3} />;
 };
 export default Test;
