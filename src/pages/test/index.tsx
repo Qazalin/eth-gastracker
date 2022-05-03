@@ -3,12 +3,11 @@ import {
   GasInfoLayout,
   ConfirmationChartLayout,
 } from "@etherTrack/layouts/main";
-import { GasInfoLayoutProps } from "@etherTrack/types";
 import { Box } from "@chakra-ui/react";
 import { ConfirmationTimeChart } from "@etherTrack/components/charts";
 
 const Test = () => {
-  const dummy: GasInfoLayoutProps = {
+  const dummy = {
     SafeGasPrice: "213",
     SafeGasEstimate: "45",
     ProposeGasPrice: "213",
@@ -17,12 +16,6 @@ const Test = () => {
     FastGasEstimate: "45",
   };
   const barChartData: [number, number, number] = [134, 235, 100];
-  return (
-    <LayoutManager
-      gasPrice={<GasInfoLayout data={dummy} />}
-      barChart={<ConfirmationChartLayout data={barChartData} />}
-      stats={<Box />}
-    />
-  );
+  return <h1>first test</h1>;
 };
 export default Test;

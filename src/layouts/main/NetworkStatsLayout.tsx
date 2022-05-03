@@ -12,9 +12,11 @@ export const NetworkStatsLayout: React.FC<{ data: IsolatedLayoutProps }> = ({
   const result = average(data.gasUsedRatio);
   return (
     <Box textAlign="center" textDecor="capitalize">
-      <Text>Network stats</Text>
-      <Box>
-        <Text>Suggested Base Fee</Text>
+      <Text variant="h1">Network stats</Text>
+      <Box mt="50px">
+        <Text variant="h2" fontSize="1.7rem">
+          Suggested Base Fee
+        </Text>
         <Text>{data.suggestBaseFee}</Text>
       </Box>
       <Box>
