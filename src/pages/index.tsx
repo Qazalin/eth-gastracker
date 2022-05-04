@@ -17,7 +17,6 @@ import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
   EtherscanGasResultType,
-  EthExchangeRateRes,
 } from "@etherTrack/types/ApiTypes";
 
 // Components //
@@ -30,8 +29,6 @@ import {
 import { Countdown } from "@etherTrack/components";
 import { GetServerSideProps } from "next";
 import { basicFetcher } from "@etherTrack/lib/basicFetcher";
-import { useEthExchangeRate } from "@etherTrack/lib/hooks/useEthExchangeRate";
-import { useEffect } from "react";
 
 const Index = ({ fallback, exchange }) => {
   // console.log(exchange);
@@ -39,10 +36,9 @@ const Index = ({ fallback, exchange }) => {
   const { error: _gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
-  >(ETHERSCAN_APIENDPOINT, GASPRICE_PARAMS, etherscanFetcher);
-
-  /*const {error: _ethExchangeRateError, data: ethExchangeRate} = useApi<ExchangeRateParames, EthExchangeRateRes>(
-          ) */
+  >(ETHERSCAN_APIENDPOINT, GASPRICE_PARAMS, etherscanFetcher, {
+    refreshInterval: 5000,
+  });
 
   /* Next, based on each of the three gas prices,
    * fetch the respective estimated confirmation time */
