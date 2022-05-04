@@ -17,22 +17,22 @@ export const NetworkStatsLayout: React.FC<{ data: IsolatedLayoutProps }> = ({
   return (
     <Box textAlign="center" textDecor="capitalize" my="40px">
       <Text variant="h1">Network stats</Text>
-      <Box mt="50px" mb="200px">
-        <Text variant="h2" fontSize="1.7rem" mb="20px">
+      <Box mt="50px" mb="20%">
+        <Text variant="h2" mb="20px">
           Suggested Base Fee
         </Text>
-        <Text variant="h2" fontSize="1.3rem">
-          {data.suggestBaseFee} gwei
-        </Text>
+        <Text variant="h2">{data.suggestBaseFee} gwei</Text>
       </Box>
       <Center flexDir="column">
-        <Text variant="h2" fontSize="1.7rem" mb="20px">
+        <Text variant="h2" mb="20px">
           Average Network Traffic
         </Text>
-        <Box w="500px" h="100px" display="flex" justifyContent="center">
+        <Box w="70%" h="20px" display="flex" justifyContent="center">
           <NetworkTrafficBar avgTraffic={result} />
         </Box>
-        <Text variant="h3">{stats}</Text>
+        <Text variant="h3" mt="10px">
+          {stats}
+        </Text>
       </Center>
     </Box>
   );

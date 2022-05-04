@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Text, TextProps } from "@chakra-ui/react";
 
-export const Countdown: React.FC<{ time: number; props?: TextProps }> = ({
+export const Countdown: React.FC<{ time: number; sx?: TextProps }> = ({
   time,
-  props,
+  sx,
 }) => {
   const [counter, setCounter] = React.useState(time);
 
@@ -20,7 +20,7 @@ export const Countdown: React.FC<{ time: number; props?: TextProps }> = ({
 
   return (
     <Box>
-      <Text {...props}>Next update in {counter}s</Text>
+      <Text {...sx}>Next update in {counter}s</Text>
     </Box>
   );
 };

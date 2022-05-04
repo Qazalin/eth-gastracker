@@ -11,17 +11,9 @@ export const NetworkTrafficBar = ({ avgTraffic }) => {
 `;
   const fillAnimation = `${fill} 2s linear`;
   return (
-    <Box
-      w="100%"
-      h="100%"
-      maxW="350px"
-      maxH="60px"
-      pos="relative"
-      borderRadius="35px"
-      overflow="hidden"
-    >
+    <Box w="100%" h="100%" pos="relative" borderRadius="35px" overflow="hidden">
       <Box
-        w={"100%"}
+        w="100%"
         h="100%"
         bgGradient="linear(to-r, #3fffa2 0%, #ffdb3a 70%, #e5405e 100%)"
       />

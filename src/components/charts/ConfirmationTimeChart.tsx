@@ -26,7 +26,7 @@ export const ConfirmationTimeChart: React.FC<{
   const id = "cost-estimation-bar";
 
   return (
-    <ResponsiveContainer width={"90%"} height={"70%"}>
+    <ResponsiveContainer width={"90%"} height={"50%"}>
       <BarChart
         style={{
           marginLeft: "20px",

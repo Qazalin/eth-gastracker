@@ -87,14 +87,9 @@ const Index = ({ fallback, exchange }) => {
         fetcher: basicFetcher,
       }}
     >
-      <Flex
-        justifyContent="space-between"
-        fontSize="1.2rem"
-        mx="20px"
-        mb="20px"
-      >
-        <Text>last updated: {cleanDate} UTC</Text>
-        <Countdown time={5} />
+      <Flex justifyContent="space-between" mx="20px" mb="20px">
+        <Text variant="h3">last updated: {cleanDate} UTC</Text>
+        <Countdown sx={{ variant: "h3" }} time={5} />
       </Flex>
       <LayoutManager
         gasPriceLayout={<GasInfoLayout data={EtherscanRes} />}
