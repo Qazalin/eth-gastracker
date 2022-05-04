@@ -5,11 +5,11 @@ export const DarkModeSwitch = () => {
   const isDark = colorMode === "dark";
   return (
     <Image
-      position="fixed"
+      pos={"absolute"}
       top="1rem"
       right="1rem"
-      mt="20px"
-      w="80px"
+      mt="35px"
+      w="50px"
       onClick={toggleColorMode}
       alt="mood"
       src={isDark ? "/moods/sun.svg" : "/moods/moon.svg"}

@@ -4,7 +4,7 @@ Real-time tracker of the Ethereum network's gas stats.
 - Estimated Confirmation Time 
 - Suggested Base Fee
 - Network Traffic
-![demo](https://i.postimg.cc/9XybCtj5/Screen-Shot-2022-05-04-at-5-06-01-PM.png)
+![demo](https://i.postimg.cc/mgN9c8gC/Screen-Shot-2022-05-04-at-5-43-53-PM.png)
 
 ## Stack
 This app was built with NextJS, SWR and Chakra UI. The gas data is fetched from the Etherscan API
