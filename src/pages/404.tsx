@@ -21,7 +21,7 @@ const Custom404 = () => {
         <Center>
           <Image src="robot.png" w="50%" h="50%" alt="robot" maxW="500px" />
           <Box textAlign="center" fontSize="2rem">
-            <Text>Sorry, you&apos;ve reached for something that doesn't exist</Text>
+            <Text>Sorry, you&apos; ve reached for something that doesn&apos;t exist</Text>
             <Link color="blue1" href="/">
               Back to home
             </Link>
