@@ -5,8 +5,8 @@ import {
   Text,
   Image,
   Link,
-} from "@chakra-ui/react";
-import { theme } from "@etherTrack/ui";
+} from "@chakra-ui/react"
+import { theme } from "@etherTrack/ui"
 
 const Custom404 = () => {
   return (
@@ -21,7 +21,7 @@ const Custom404 = () => {
         <Center>
           <Image src="robot.png" w="50%" h="50%" alt="robot" maxW="500px" />
           <Box textAlign="center" fontSize="2rem">
-            <Text>Sorry, you've reached for something that doesn't exist</Text>
+            <Text>Sorry, you&apos;ve reached for something that doesn't exist</Text>
             <Link color="blue1" href="/">
               Back to home
             </Link>
@@ -29,6 +29,6 @@ const Custom404 = () => {
         </Center>
       </Box>
     </ChakraProvider>
-  );
-};
-export default Custom404;
+  )
+}
+export default Custom404
