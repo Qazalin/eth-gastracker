@@ -17,6 +17,7 @@ import {
   EtherscanGasParams,
   EtherscanGasPriceRes,
   EtherscanGasResultType,
+  EthExchangeRateRes,
 } from "@etherTrack/types/ApiTypes";
 
 // Components //
@@ -29,13 +30,19 @@ import {
 import { Countdown } from "@etherTrack/components";
 import { GetServerSideProps } from "next";
 import { basicFetcher } from "@etherTrack/lib/basicFetcher";
+import { useEthExchangeRate } from "@etherTrack/lib/hooks/useEthExchangeRate";
+import { useEffect } from "react";
 
-const Index = ({ fallback }) => {
+const Index = ({ fallback, exchange }) => {
+  // console.log(exchange);
   /* First get the gas prices */
   const { error: _gasPriceError, data: gasPrice } = useApi<
     EtherscanGasParams,
     EtherscanGasPriceRes
   >(ETHERSCAN_APIENDPOINT, GASPRICE_PARAMS, etherscanFetcher);
+
+  /*const {error: _ethExchangeRateError, data: ethExchangeRate} = useApi<ExchangeRateParames, EthExchangeRateRes>(
+          ) */
 
   /* Next, based on each of the three gas prices,
    * fetch the respective estimated confirmation time */
@@ -109,12 +116,17 @@ export default Index;
 export const getServerSideProps: GetServerSideProps = async () => {
   const gasApiEndpoint = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.EHERSCAN_API_KEY}`;
   const res = await fetch(gasApiEndpoint);
+  const exe = await fetch(
+    "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR"
+  );
   const data: EtherscanGasResultType = await res.json();
+  const ex = await exe.json();
   return {
     props: {
       fallback: {
         "https://api.etherscan.io/api": data,
       },
+      exchange: ex,
     },
   };
 };

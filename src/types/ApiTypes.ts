@@ -30,3 +30,8 @@ export interface EtherscanGasParams extends Record<string, string> {
 export interface EtherscanGasEtimateParams extends EtherscanGasParams {
   gasPrice: string;
 }
+
+export interface EthExchangeRateRes {
+  USD: number;
+  EUR: number;
+}

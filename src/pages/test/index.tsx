@@ -1,15 +1,16 @@
 import { NetworkTrafficBar } from "@etherTrack/components/charts";
+import { ConfirmationChartLayout } from "@etherTrack/layouts";
 
 const Test = () => {
   const dummy = {
-    SafeGasPrice: "213",
-    SafeGasEstimate: "45",
-    ProposeGasPrice: "213",
-    ProposeGasEstimate: "195",
-    FastGasPrice: "215",
-    FastGasEstimate: "45",
+    SafeGasPrice: parseInt("213"),
+    SafeGasEstimate: parseInt("45"),
+    ProposeGasPrice: parseInt("213"),
+    ProposeGasEstimate: parseInt("195"),
+    FastGasPrice: parseInt("215"),
+    FastGasEstimate: parseInt("45"),
   };
   const barChartData: [number, number, number] = [134, 235, 100];
-  return <NetworkTrafficBar avgTraffic={0.3} />;
+  return <ConfirmationChartLayout data={dummy} />;
 };
 export default Test;

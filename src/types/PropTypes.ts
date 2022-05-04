@@ -1,4 +1,4 @@
-import { CircularProgressProps } from "@chakra-ui/react";
+import { CircularProgressProps, TooltipProps } from "@chakra-ui/react";
 import React from "react";
 
 export type LayoutPropType = {
@@ -56,4 +56,11 @@ export type NetworkStatsLayoutProps = {
   suggestedBaseFeeGwei: number;
   suggestedBaseFeeUSD: number;
   gasUsedRatio: number[];
+};
+
+export type TooltipPropType = {
+  children: React.ReactNode;
+  content: string;
+  isVisibile: boolean;
+  sx: Omit<TooltipProps, "children">;
 };

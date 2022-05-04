@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { BarChartTooltip } from "@etherTrack/components/tooltips";
 
 /**
  * A bar chart for illustrating estimated confirmation time for the three categories of gas prices: Low, Average and High
@@ -48,6 +49,7 @@ export const ConfirmationTimeChart: React.FC<{
         <CartesianGrid opacity={0.1} vertical={false} />
         <XAxis dataKey="name" />
         <YAxis />
+        <Tooltip content={<BarChartTooltip />} cursor={false} />
         <Bar
           radius={[25, 25, 0, 0]}
           dataKey="time"

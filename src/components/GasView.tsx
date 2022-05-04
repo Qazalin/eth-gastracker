@@ -4,6 +4,7 @@ import React from "react";
 import { secondsToMins } from "@etherTrack/lib";
 import { Text } from "@chakra-ui/react";
 import { useAdaptivityContext } from "@etherTrack/lib/hooks/useAdaptivityContext";
+import Tooltip from "./tooltips/CutomTooltip";
 
 /**
  * An isolated component of the view for each gas price with their relative percentage differences
@@ -27,6 +28,10 @@ export const GasView: React.FC<GasViewPropType> = ({
 
   const color = colors[title]; // color for the illustration
   const value = percentageDiff == 0 ? 100 : 100 - percentageDiff; // calculate based on difference with 100%
+  const formattedTime =
+    estimatedTime >= 60
+      ? secondsToMins(estimatedTime) + " " + "mins"
+      : estimatedTime + " " + "seconds";
 
   return (
     <Box
@@ -41,12 +46,22 @@ export const GasView: React.FC<GasViewPropType> = ({
           pos={isMobile ? "initial" : "absolute"}
           bottom={isMobile ? "none" : 0}
         >
-          <Text minW="70px">{gasPrice} gwei</Text>
-          <Text minW="80px" color="text2">
-            {estimatedTime >= 60
-              ? secondsToMins(estimatedTime) + " " + "mins"
-              : estimatedTime + " " + "seconds"}
-          </Text>
+          <Tooltip
+            content={"Gwei is a unit of ether used for transaction fees"}
+            isVisibile={title === "Average" ? true : false}
+            sx={{ bg: color }}
+          >
+            <Text minW="70px">{gasPrice} gwei</Text>
+          </Tooltip>
+          <Tooltip
+            isVisibile={title === "High" ? true : false}
+            sx={{ bg: color }}
+            content={`It'll take about ${formattedTime} to confirm your transaction`}
+          >
+            <Text minW="80px" color="text2">
+              {formattedTime}
+            </Text>
+          </Tooltip>
         </Box>
       </Box>
       <CircularProgress

@@ -1,12 +1,12 @@
-import { useAdaptivityContext } from "@etherTrack/lib/hooks/useAdaptivityContext";
-import { MainLayoutProps } from "@etherTrack/types";
-import React from "react";
-import { MobileLayout } from "./MobileLayout";
-import { DesktopLayout } from "./DesktopLayout";
+import { useAdaptivityContext } from "@etherTrack/lib/hooks/useAdaptivityContext"
+import { MainLayoutProps } from "@etherTrack/types"
+import React from "react"
+import { MobileLayout } from "./MobileLayout"
+import { DesktopLayout } from "./DesktopLayout"
 import {
   MobileGhostLayout,
   DesktopGhostLayout,
-} from "@etherTrack/layouts/ghost";
+} from "@etherTrack/layouts/ghost"
 
 /**
  * Top-level component that decides on which layout and handles global loading states
@@ -16,13 +16,12 @@ import {
  * @param statsLayout
  */
 export const LayoutManager: React.FC<MainLayoutProps> = (props) => {
-  console.log(props.isLoading);
-  const isMobile = useAdaptivityContext();
+  const isMobile = useAdaptivityContext()
   if (props.isLoading) {
-    if (isMobile) return <MobileGhostLayout />;
-    else return <DesktopGhostLayout />;
+    if (isMobile) return <MobileGhostLayout />
+    else return <DesktopGhostLayout />
   } else {
-    if (isMobile) return <MobileLayout {...props} />;
-    else return <DesktopLayout {...props} />;
+    if (isMobile) return <MobileLayout {...props} />
+    else return <DesktopLayout {...props} />
   }
-};
+}

@@ -28,6 +28,10 @@ export const textStyles: ComponentStyleConfig = {
       fontFamily: FONTS.bodyFont,
       fontWeight: "light",
     },
+    h3: {
+      fontSize: "1.3rem",
+      fontWeight: "light",
+    },
     p: {
       fontSize: "1rem",
       fontFamily: FONTS.bodyFont,
