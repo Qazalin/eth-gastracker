@@ -86,7 +86,7 @@ export const ThemeColors = {
       },
       bg0: {
         default: "gray.50",
-        _dark: "gray.900",
+        _dark: "#181822",
       },
       bg1: {
         default: "gray.100",
