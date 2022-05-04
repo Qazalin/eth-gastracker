@@ -8,6 +8,14 @@ import { buttonStyles } from "./components/button";
 const colors = COLORS.colors;
 const semanticTokens = ThemeColors.semanticTokens;
 
+export function getPrimaryGradient(colorMode: "light" | "dark") {
+  const primaryGradient =
+    colorMode == "light"
+      ? "linear(to-r, bg1 85%, #EBCDD6)"
+      : "linear(to-r, #22222E 85%, #342C39)";
+  return primaryGradient;
+}
+
 const config: ThemeConfig = {
   initialColorMode: "light",
   useSystemColorMode: true,
