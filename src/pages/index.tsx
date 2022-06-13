@@ -31,19 +31,44 @@ import { GetServerSideProps } from "next"
 import { basicFetcher } from "@etherTrack/lib/basicFetcher"
 
 const Index = ({ fallback, exchange }) => {
-    const EtherscanRes = {
-        SafeGasPrice: 72,
-        SafeGasEstimate: null,
-        ProposeGasPrice: 73,
-        ProposeGasEstimate: null,
-        FastGasPrice: 73,
-        FastGasEstimate: null,
-        suggestBaseFee: 71,
-        gasUsedRatio: [
-            0.2775205, 0.542596221456415, 0.433101534039205, 0.506558135653399,
-            0.302100084060163,
-        ],
+    /* First get the gas prices */
+    const { error: _gasPriceError, data: gasPrice } = useApi<
+        EtherscanGasParams,
+        EtherscanGasPriceRes
+    >(ETHERSCAN_APIENDPOINT, GASPRICE_PARAMS, etherscanFetcher, {
+        refreshInterval: 5000,
+    })
+
+    /* Next, based on each of the three gas prices,
+     * fetch the respective estimated confirmation time */
+    const { error: _safeGasError, data: safeGasEstimate } = useGasEtimator(
+        gasPrice ? gasPrice.result.SafeGasPrice : null
+    )
+    const { error: _proposeGasError, data: proposeGasEstimate } =
+        useGasEtimator(gasPrice ? gasPrice.result.ProposeGasPrice : null)
+    const { error: _fastGasError, data: fastGasEstimate } = useGasEtimator(
+        gasPrice ? gasPrice.result.FastGasPrice : null
+    )
+
+    /* The final object that will be exposed to the UI component */
+    let EtherscanRes: IsolatedLayoutProps | undefined
+    if (gasPrice && safeGasEstimate && proposeGasEstimate && fastGasEstimate) {
+        const gasUsedRatio = gasPrice.result.gasUsedRatio.split(",").map(Number)
+        EtherscanRes = {
+            SafeGasPrice: parseInt(gasPrice.result.SafeGasPrice),
+            SafeGasEstimate: parseInt(fastGasEstimate.result),
+            ProposeGasPrice: parseInt(gasPrice.result.ProposeGasPrice),
+            ProposeGasEstimate: parseInt(proposeGasEstimate.result),
+            FastGasPrice: parseInt(gasPrice.result.FastGasPrice),
+            FastGasEstimate: parseInt(fastGasEstimate.result),
+            suggestBaseFee: parseInt(gasPrice.result.suggestBaseFee),
+            gasUsedRatio: gasUsedRatio,
+        }
+        console.log(EtherscanRes)
+    } else {
+        EtherscanRes = null
     }
+
     /* last updated date and time */
     const d = new Date()
     const lastUpdated = d.toISOString()
